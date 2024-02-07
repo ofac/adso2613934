@@ -3,11 +3,9 @@
 
 ## TGO en Analisis y Desarrollo de Software
 
-**Lista de Temas** público
-
-| Temas | Tipo | 
+| Temas | Descripción | 
 |---------|-------| 
-|1. PHP |C | 
-|2. POO|B |
+|1. POO | PHP Orientado a Objetos | 
+|2. PDO | Objetos de Datos en PHP |
 
-![Hollow](http://tinyurl.com/en2vdxr4)
+![Hollow](http://tinyurl.com/c987r8kj)
