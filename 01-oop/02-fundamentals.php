@@ -8,6 +8,7 @@
     <style>
         section {
             background-color: #0009;
+            border-radius: 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -18,24 +19,54 @@
                 margin: 0;
             } 
 
+            ul {
+                padding: 0;
+                margin: 0;
+            }
+
             figure {
+                background-color: #fff3;
+                border: 2px solid #fff6;
+                border-radius: 8px;
                 font-size: 6rem;
+                margin: 0;
+            }
+
+            form {
+                display: flex;
+                justify-content: space-between;
+                gap: 1rem;
+                width: 100%;
+                button {
+                    border: 2px solid #fff6;
+                    background-color: #994bde;
+                    border-radius: 8px;
+                    color: #fff9;
+                    cursor: pointer;
+                    font-size: 1rem;
+                    width: 100px;
+                    padding: 0.6rem;
+                }
             }
         }
     </style>
 </head>
 <body>
+    <nav class="controls">
+        <a href="index.html">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#ffffff" d="M512 256A256 256 0 1 0 0 256a256 256 0 1 0 512 0zM231 127c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-71 71L376 232c13.3 0 24 10.7 24 24s-10.7 24-24 24l-182.1 0 71 71c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L119 273c-9.4-9.4-9.4-24.6 0-33.9L231 127z"/></svg>    
+        </a>
+    </nav>
     <main>
         <h1>02- Fundamentals</h1>
         <section>
-            <figure>
-                <?php
+            <?php
                 
                 class Runner {
                     // Attributes
-                    private $name;
-                    private $age;
-                    private $number;
+                    public $name;
+                    public $age;
+                    public $number;
 
                     // Methods
                     public function __construct($name, $age, $number) {
@@ -58,13 +89,27 @@
                 }
 
                 $runner = new Runner('Usain Bolt', 35, 105);
-                echo $runner->run();
-                echo $runner->jump();
-                echo $runner->stop();
-                echo $runner->run();
 
+            ?>
+            <h2>Class Runner</h2>
+            <ul>
+                <li>Name:   <?=$runner->name ?></li>
+                <li>Age:    <?=$runner->age ?></li>
+                <li>Number: <?=$runner->number ?></li>
+            </ul>
+            <figure>
+                <?php
+                    echo $runner->run();
+                    echo $runner->jump();
+                    echo $runner->stop();
+                    echo $runner->run();
                 ?>
             </figure>
+            <form action="" method="post">
+                <button> Run </button>
+                <button> Stop </button>
+                <button> Jump </button>
+            </form>
         </section>
     </main>
 </body>
