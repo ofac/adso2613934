@@ -25,11 +25,12 @@
             }
 
             figure {
-                background-color: #fff3;
+                background-color: #0003;
                 border: 2px solid #fff6;
                 border-radius: 8px;
                 font-size: 6rem;
                 margin: 0;
+                padding-top: 2.6rem;
             }
 
             form {
@@ -76,19 +77,19 @@
                     }
 
                     public function run() {
-                        return "🏃🏻‍♂️";
+                        return "<img src='images/run.gif'>";
                     }
 
                     public function stop() {
-                        return "🧎🏻‍♂️";
+                        return "<img src='images/stop.gif'>";
                     }
 
                     public function jump() {
-                        return "🚶🏻‍♂️";
+                        return "<img src='images/jump.gif'>";
                     }
                 }
 
-                $runner = new Runner('Usain Bolt', 35, 105);
+                $runner = new Runner('Mega Man', 15, 99);
 
             ?>
             <h2>Class Runner</h2>
@@ -99,16 +100,25 @@
             </ul>
             <figure>
                 <?php
-                    echo $runner->run();
-                    echo $runner->jump();
-                    echo $runner->stop();
-                    echo $runner->run();
+                    if($_POST) {
+                        //echo var_dump($_POST);
+                        if(isset($_POST['run'])) {
+                            echo $runner->run();
+                        } elseif (isset($_POST['stop'])) {
+                            echo $runner->stop();
+                        } else {
+                            echo $runner->jump();
+                        }
+                    } else {
+                        echo $runner->stop();
+                    }
                 ?>
             </figure>
+        
             <form action="" method="post">
-                <button> Run </button>
-                <button> Stop </button>
-                <button> Jump </button>
+                <button name="run"> Run </button>
+                <button name="stop"> Stop </button>
+                <button name="jump"> Jump </button>
             </form>
         </section>
     </main>
