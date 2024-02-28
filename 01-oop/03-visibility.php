@@ -143,7 +143,6 @@
                 $table = new TableMaker($nr, $nc);
                 $table->drawTable();
             }
-        
         ?>
         </section>
     </main>
