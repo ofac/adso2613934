@@ -32,6 +32,10 @@
                     display: flex;
                     justify-content: space-between;
                     gap: 1.4rem;
+
+                    p {
+                        width: 80px;
+                    }
                 }
 
                 output {
@@ -48,7 +52,23 @@
                     width: 300px;
                     padding: 1rem;
                 }
+            }
 
+            table {
+                border-collapse: collapse;
+                tr {
+                    td {
+                        background-color: #fff1;
+                        border: 1px solid #fff;
+                        padding: 8px;
+                    }
+                }
+                tr:nth-child(even) td:nth-child(even) {
+                    background-color: #fff3;
+                }
+                tr:nth-child(odd) td:nth-child(odd) {
+                    background-color: #fff3;
+                }
             }
         }
     </style>
@@ -76,9 +96,8 @@
 
                     public function drawTable() {
                         echo $this->startTable();
-                        echo $this->contentTable();
+                        $this->contentTable();
                         echo $this->endTable();
-
                     }
 
                     private function startTable() {
@@ -86,9 +105,13 @@
                     }
 
                     private function contentTable() {
-                        return '<tr>  
-                                    <td></td>
-                                </tr>';
+                        for ($r=0; $r < $this->nr ; $r++) { 
+                            echo '<tr>';
+                            for ($c=0; $c < $this->nc; $c++) { 
+                                echo '<td></td>';
+                            }
+                            echo '</tr>';
+                        }
                     }
 
                     private function endTable() {
@@ -97,23 +120,31 @@
 
                 }
 
-                $table = new TableMaker(10, 8);
-                $table->drawTable();
             ?>
             <h2>Table Maker</h2>
             <form action="" method="post">
             <label>
                 <p>Rows:</p>
-                <input type="range" name="nr" min="1" max="20" step="1" value="0" oninput="o1.value=this.value">
-                <output id="o1">0</output>
+                <input type="range" name="nr" min="1" max="20" step="1" value="1" oninput="o1.value=this.value">
+                <output id="o1">1</output>
             </label>
             <label>
                 <p>Columns:</p>
-                <input type="range" name="nc" min="1" max="20" step="1" value="0" oninput="o2.value=this.value">
-                <output id="o2">0</output>
+                <input type="range" name="nc" min="1" max="20" step="1" value="1" oninput="o2.value=this.value">
+                <output id="o2">1</output>
             </label>
             <button> Make Table </button>
         </form>
+        <?php 
+            if  ($_POST) {
+                $nr = $_POST['nr'];
+                $nc = $_POST['nc'];
+
+                $table = new TableMaker($nr, $nc);
+                $table->drawTable();
+            }
+        
+        ?>
         </section>
     </main>
 </body>
