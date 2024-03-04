@@ -18,6 +18,42 @@
             h2 {
                 margin: 0;
             } 
+            div.pks {
+                display: flex;
+                gap: 1rem;
+                div.pk {
+                    background-repeat: no-repeat;
+                    display: flex;
+                    position: relative;
+                    flex-direction: column;
+                    height: 308px;
+                    overflow: hidden;
+                    padding: 4px;
+                    width: 141px;
+                    div.info {
+                        background-color: #0009;
+                        border-bottom: 2px solid #fffc;
+                        color: #fffa;
+                        display: flex;
+                        flex-direction: column;
+                        position: absolute;
+                        bottom: -52px;
+                        left: 2px;
+                        padding: 4px;
+                        transition: bottom 0.4s ease-in;
+                        width: 128px;
+                        span:nth-child(1) {
+                            background-color: #0009;
+                            color: #fff;
+                            text-align: center;
+                            margin-bottom: 4px;
+                        }
+                    }
+                }
+                div.pk:hover div.info {
+                    bottom: 0;
+                }
+            }
         }
     </style>
 </head>
@@ -36,14 +72,14 @@
                     protected $name;
                     protected $type;
                     protected $healt;
-                    //protected $image;
-
+                    protected $img;
 
                     // Methods
-                    public function __construct($name, $type, $healt) {
+                    public function __construct($name, $type, $healt, $img) {
                         $this->name  = $name;
                         $this->type  = $type;
                         $this->healt = $healt;
+                        $this->img   = $img;
                     }
                     public function attack() {
                         return "Attack";
@@ -52,31 +88,34 @@
                         return "Defense";
                     }
                     public function show() {
-                        return $this->name . " | " . $this->type . " | " . $this->healt;
+                        return 
+                        "<div class='pk' style='background-image: url(". $this->img .")'>" . 
+                            "<div class='info'>" . 
+                                "<span>" . $this->name  . "</span>" .
+                                "<span> Type: " . $this->type  . "</span>" .
+                                "<span> Healt: " . $this->healt . "</span>" .
+                            "</div>" . 
+                        "</div>";
                     }
                 }
 
                 class Evolve extends Pokemon {
-                    public function levelUp($name, $type, $healt) {
-                        $this->name  = $name;
-                        $this->type  = $type;
-                        $this->healt = $healt;
+                    public function levelUp($name, $type, $healt, $img) {
+                        parent::__construct($name, $type, $healt, $img);
                     }
                 }
-
-                $pk = new Evolve('Charmander', 'Fire', 150);
-                echo $pk->attack();
-                echo $pk->defense();
-                echo $pk->show();
-                $pk->levelUp('Charmeleon', 'Fire', 250);
-                echo $pk->show();
-                $pk->levelUp('Charizard', 'Fire-Fly', 450);
-                echo $pk->show();
-
-            ?>
+                ?>
             <h2>Evolve your Pokemon</h2>
- 
-
+            <div class="pks">
+            <?php
+                $pk = new Evolve('Charmander', 'Fire', 150, 'images/charmander.png');
+                echo $pk->show();
+                $pk->levelUp('Charmeleon', 'Fire', 250, 'images/charmeleon.png');
+                echo $pk->show();
+                $pk->levelUp('Charizard', 'Fire-Fly', 450, 'images/charizard.png');
+                echo $pk->show();
+            ?>
+            </div>
         </section>
     </main>
 </body>
