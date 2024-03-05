@@ -27,8 +27,10 @@
                     position: relative;
                     flex-direction: column;
                     height: 308px;
+                    filter: grayscale(1);
                     overflow: hidden;
                     padding: 4px;
+                    transition: all 0.5s ease-in;
                     width: 141px;
                     div.info {
                         background-color: #0009;
@@ -49,6 +51,9 @@
                             margin-bottom: 4px;
                         }
                     }
+                }
+                div.pk:hover {
+                    filter: grayscale(0);
                 }
                 div.pk:hover div.info {
                     bottom: 0;
