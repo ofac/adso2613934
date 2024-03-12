@@ -5,6 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>05- Abstract</title>
     <link rel="stylesheet" href="css/master.css">
+    <style>
+        table {
+            border-collapse: collapse;  
+            tr:nth-child(even) {
+                background-color: #0006;
+            }
+            tr:nth-child(1) th:first-child {
+                border-radius: 10px 0 0 0;
+            }
+            tr:nth-child(1) th:last-child {
+                border-radius: 0 10px 0 0;
+            }
+            tr:last-child td:first-child {
+                border-radius: 0 0 0 10px;
+            }
+            tr:last-child td:last-child {
+                border-radius: 0  0 10px 0;
+            }
+            th {
+                padding: 0.6rem;
+                background-color: #fff6;
+                color: #0009;
+            }
+            td {
+                background-color: #0009;
+                padding: 0.2rem 1rem;
+                img {
+                    width: 40px;
+                }
+            }
+        }
+    </style>
 </head>
 <body>
     <nav class="controls">
@@ -38,9 +70,9 @@
                     public function connect() {
                         try {
                             $this->conx = new PDO("mysql:host=$this->host;dbname=$this->dbname", $this->user, $this->pass);
-                            if($this->conx) {
-                                echo "😜";
-                            }
+                            // if($this->conx) {
+                            //     echo "😜";
+                            // }
                         } catch (PDOException $e) {
                             echo "Error: " . $e->getMessage();
                         }
@@ -48,14 +80,45 @@
                 }
 
                 class Pokemon extends DataBase {
-
+                    public function getData() {
+                        try {
+                            $sql = "SELECT * FROM pokemons";
+                            $stm = $this->conx->prepare($sql);
+                            $stm->execute();
+                            return $stm->fetchAll();
+                        } catch (PDOException $e) {
+                            echo "Error: " . $e->getMessage();
+                        }
+                    }
                 }
 
                 $db = new Pokemon('adso2613934');
                 $db->connect();
-
-                
+                $pokemons = $db->getData();
+                //echo var_dump($pokemons);
             ?>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Health</th>
+                        <th>Image</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php foreach($pokemons as $pk): ?>
+                    <tr>
+                        <td><?=$pk['id'] ?></td>
+                        <td><?=$pk['name'] ?></td>
+                        <td><?=$pk['type'] ?></td>
+                        <td><?=$pk['health'] ?></td>
+                        <td><img src="images/<?=$pk['image'] ?>" alt="<?=$pk['name'] ?>"></td>
+                    </tr>
+                <?php endforeach ?>
+                </tbody>
+            </table>
         </section>
     </main>
 </body>
